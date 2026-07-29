@@ -1,0 +1,11 @@
+# Netlify configuration for building the MERN frontend subfolder
+[build]
+  base = "client"
+  command = "npm run build"
+  publish = "dist"
+
+# Redirect rules for Single Page Application (SPA) routing fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
