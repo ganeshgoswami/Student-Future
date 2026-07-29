@@ -1,0 +1,274 @@
+/* ==========================================================================
+   FutureStudent Global CSS - Glassmorphic Styling Palette
+   ========================================================================== */
+
+:root {
+  --bg-gradient: linear-gradient(135deg, #020105 0%, #0c0817 100%);
+  --bg-surface: #000000;
+  --bg-surface-opaque: #000000;
+  --border-color: #00f0ff;
+  --border-color-hover: #00f0ff;
+  
+  --primary-color: #00f0ff;
+  --primary-hover: #00c8ff;
+  --primary-glow: rgba(0, 240, 255, 0.15);
+  
+  --text-main: #ffffff;
+  --text-muted: #ffffff;
+  
+  --success: #10b981;
+  --danger: #f43f5e;
+  --warning: #fbbf24;
+  --info: #00f0ff;
+
+  --palette-visited: #ef4444;
+  --palette-answered: #10b981;
+  --palette-marked: #a855f7;
+  --palette-answered-marked: #6366f1;
+  --palette-not-visited: #334155;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: var(--bg-gradient) !important;
+  color: var(--text-main) !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Premium Black Cards with Animated Sky Blue Running Light Borders */
+.glass-card {
+  position: relative;
+  background: #000000 !important;
+  border: 1px solid transparent !important;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 30px rgba(0, 240, 255, 0.08) !important;
+  color: var(--text-main) !important;
+  background-image: linear-gradient(#000000, #000000), linear-gradient(90deg, #00f0ff, #0055ff, #00f0ff, #0055ff, #00f0ff);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-size: 300% 300%;
+  animation: runningBorderLight 6s linear infinite;
+  transition: box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.25) !important;
+}
+
+@keyframes runningBorderLight {
+  0% {
+    background-position: 0% 50%, 0% 50%;
+  }
+  50% {
+    background-position: 150% 50%, 150% 50%;
+  }
+  100% {
+    background-position: 300% 50%, 300% 50%;
+  }
+}
+
+/* Active navigation state rules */
+.nav-link.active {
+  background-color: var(--primary-glow) !important;
+  border: 1px solid var(--primary-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.nav-link.active-admin {
+  background-color: var(--primary-color) !important;
+  color: #000000 !important;
+  font-weight: 700;
+}
+
+/* Question Palette Buttons */
+.palette-btn {
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.15s ease;
+}
+
+.palette-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px var(--primary-color);
+}
+
+.palette-btn.active {
+  border: 2px solid #fff !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.palette-btn.not-visited { background-color: var(--palette-not-visited); color: #cbd5e1; opacity: 0.6; }
+.palette-btn.skipped { background-color: var(--palette-visited); }
+.palette-btn.answered { background-color: var(--palette-answered); color: #000; }
+.palette-btn.marked { background-color: var(--palette-marked); }
+.palette-btn.answered-marked { background-color: var(--palette-answered-marked); position: relative; }
+.palette-btn.answered-marked::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 6px;
+  height: 6px;
+  background-color: var(--palette-answered);
+  border-radius: 50%;
+}
+
+/* Results Progress Ring SVG */
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+.progress-ring__circle {
+  transition: stroke-dashoffset 0.8s ease;
+  stroke-dasharray: 314.159; /* 2 * PI * r(50) */
+  stroke-linecap: round;
+}
+
+/* Question options */
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.option-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(140, 82, 255, 0.4);
+}
+
+.option-row.selected {
+  background: var(--primary-glow);
+  border-color: var(--primary-color);
+}
+
+.option-marker {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.option-row.selected .option-marker {
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+}
+
+.option-row.selected .option-marker::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #000;
+}
+
+.option-row.multi .option-marker {
+  border-radius: 4px;
+}
+.option-row.multi.selected .option-marker::after {
+  border-radius: 1px;
+  width: 6px;
+  height: 6px;
+}
+
+/* Dropdown list items styling override */
+.dropdown-item {
+  color: #f1f5f9 !important;
+  transition: all 0.15s ease;
+}
+.dropdown-item:hover {
+  background-color: var(--primary-color) !important;
+  color: #000000 !important;
+}
+
+/* Tables styling */
+.table {
+  color: var(--text-main) !important;
+  background-color: transparent !important;
+}
+
+.table th {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  color: var(--text-muted) !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.table td {
+  background-color: transparent !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.table-hover tbody tr:hover td {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Global overrides to make all standard text white */
+body, p, span, div, h1, h2, h3, h4, h5, h6, label, td, th, input, select, textarea, a, .text-muted, .text-white-50, .text-secondary {
+  color: #ffffff !important;
+}
+
+/* Exclude and restore semantic colors for results and metrics visibility */
+.text-success, .text-success * {
+  color: #10b981 !important;
+}
+.text-danger, .text-danger * {
+  color: #f43f5e !important;
+}
+.text-warning, .text-warning * {
+  color: #fbbf24 !important;
+}
+.text-info, .text-info * {
+  color: #00f0ff !important;
+}
+
+/* Exclude dropdown item hover text */
+.dropdown-item:hover {
+  color: #000000 !important;
+}
+
+/* Inputs placeholder text transparency */
+input::placeholder, textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}

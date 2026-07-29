@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FutureStudent Online Exam System</title>
+  <!-- Google Fonts: Inter and Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ================= NOTIFICATION TOAST ================= -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- ================= MAIN HEADER ================= -->
+  <header class="main-header">
+    <div class="header-logo" onclick="app.showView('dashboard-view')">
+      <span class="logo-icon">⚡</span>
+      <span class="logo-text">Student<span class="logo-accent">Future</span></span>
+    </div>
+    <nav class="header-nav">
+      <button class="nav-btn active" id="nav-dashboard" onclick="app.showView('dashboard-view')">Dashboard</button>
+      <button class="nav-btn" id="nav-admin" onclick="app.showView('admin-view')">Admin & Database Schema</button>
+    </nav>
+    <div class="header-actions">
+      <div class="student-profile-select">
+        <label for="profile-select">Active Student:</label>
+        <select id="profile-select" onchange="app.changeStudent()"></select>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" onclick="app.toggleTheme()">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <!-- ================= VIEW 1: DASHBOARD ================= -->
+    <section id="dashboard-view" class="view-section active">
+      <div class="hero-section">
+        <h1>Welcome back to StudentFuture</h1>
+        <p>Choose an examination and test your skills. All papers are dynamically generated, shuffled, and graded automatically.</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <!-- Tests list column -->
+        <div class="dashboard-column tests-column">
+          <h2 class="section-title">Available Assessments</h2>
+          <div id="tests-list" class="tests-list-grid">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Leaderboards column -->
+        <div class="dashboard-column stats-column">
+          <h2 class="section-title">Test Leaderboards & History</h2>
+          
+          <div class="leaderboard-selector">
+            <label for="leaderboard-test-select">Select Test:</label>
+            <select id="leaderboard-test-select" onchange="app.loadLeaderboard()"></select>
+          </div>
+
+          <div class="leaderboard-card glass">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Student Name</th>
+                    <th>Score</th>
+                    <th>Percent</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div class="overview-stats-grid">
+            <div class="stat-card glass">
+              <div class="stat-value" id="stat-questions">-</div>
+              <div class="stat-label">Questions in Pool</div>
+            </div>
+            <div class="stat-card glass">
+              <div class="stat-value" id="stat-tests">-</div>
+              <div class="stat-label">Active Tests</div>
+            </div>
+            <div class="stat-card glass">
+              <div class="stat-value" id="stat-attempts">-</div>
+              <div class="stat-label">Total Attempts Run</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 2: EXAM PORTAL ================= -->
+    <section id="exam-view" class="view-section">
+      <div class="exam-header glass">
+        <div class="exam-meta">
+          <h1 id="exam-title" class="exam-title-text">Loading Exam...</h1>
+          <div class="exam-student-badge">Candidate: <span id="exam-student-name">Loading...</span></div>
+        </div>
+        <div class="exam-timer-container">
+          <div class="timer-label">Time Remaining</div>
+          <div class="timer-row">
+            <span id="exam-timer" class="exam-timer-clock">00:00</span>
+            <div class="timer-progress-bg">
+              <div id="timer-progress-bar" class="timer-progress-fill" style="width: 100%"></div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-submit" onclick="app.confirmSubmit()">Submit Exam</button>
+      </div>
+
+      <div class="exam-layout">
+        <!-- Left Column: Sections Sidebar -->
+        <aside class="exam-sections-sidebar glass">
+          <h3 class="sidebar-title">Exam Sections</h3>
+          <div id="exam-sections-list" class="sections-nav">
+            <!-- Dynamically populated Section Tabs -->
+          </div>
+          <div class="optional-rule-card">
+            <h4>⚠️ Optional Question Rule</h4>
+            <p>Each section requires answering a specific number of questions. The system strictly prevents you from answering more than the section limit. You must deselect a choice before changing optional selections.</p>
+          </div>
+        </aside>
+
+        <!-- Center Column: Question Arena -->
+        <div class="exam-question-arena glass">
+          <!-- Banner for optional limits warnings -->
+          <div id="optional-limit-warning" class="warning-banner hidden">
+            <span>⚠️ Optional Limit Reached! You have already answered the maximum questions in this section. Please clear an answer from another question to select this one.</span>
+          </div>
+
+          <div class="question-meta-row">
+            <div class="meta-left">
+              <span id="q-category-badge" class="badge">Arithmetic</span>
+              <span id="q-sub-badge" class="badge badge-outline">Percentage</span>
+              <span id="q-difficulty-badge" class="badge badge-difficulty">Medium</span>
+            </div>
+            <div class="meta-right">
+              <span class="marks-indicator">Marks: <strong id="q-marks-val">+2</strong></span>
+              <span class="marks-indicator">Negative: <strong id="q-neg-val">-0.5</strong></span>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <div class="question-number-display">Question <span id="q-index-num">1</span> of <span id="q-section-total-num">10</span></div>
+            <div id="question-text" class="question-text-content">
+              Loading question text...
+            </div>
+            
+            <div id="question-image-container" class="question-image-container hidden">
+              <!-- Image displayed if available -->
+              <img id="question-image" src="" alt="Question Image">
+            </div>
+
+            <div class="options-header">Select the correct answer: <span id="q-multi-select-note" class="multi-select-note">(Multiple choices correct)</span></div>
+            <div id="options-container" class="options-grid">
+              <!-- Dynamically populated options -->
+            </div>
+          </div>
+
+          <div class="question-controls">
+            <button class="btn btn-secondary" onclick="app.prevQuestion()">Previous</button>
+            <button class="btn btn-danger-outline" onclick="app.clearAnswer()">Clear Choice</button>
+            <button class="btn btn-warning-outline" id="btn-mark-review" onclick="app.toggleMarkForReview()">Mark For Review</button>
+            <button class="btn btn-primary" onclick="app.nextQuestion()">Save & Next</button>
+          </div>
+        </div>
+
+        <!-- Right Column: Question Palette -->
+        <aside class="exam-palette-sidebar glass">
+          <h3 class="sidebar-title">Question Palette</h3>
+          
+          <div class="palette-stats">
+            <div class="sec-progress-summary">
+              Section Answering Limit: <strong id="sec-answered-counter">0/0</strong>
+            </div>
+          </div>
+
+          <div id="palette-grid" class="palette-grid-buttons">
+            <!-- Dynamically populated question numbers -->
+          </div>
+
+          <div class="palette-legend">
+            <h4>Legend</h4>
+            <div class="legend-grid">
+              <div class="legend-item"><span class="legend-dot not-visited"></span> Not Visited</div>
+              <div class="legend-item"><span class="legend-dot skipped"></span> Skipped / Not Answered</div>
+              <div class="legend-item"><span class="legend-dot answered"></span> Answered</div>
+              <div class="legend-item"><span class="legend-dot marked"></span> Marked for Review</div>
+              <div class="legend-item"><span class="legend-dot answered-marked"></span> Answered & Marked</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 3: RESULTS REPORT ================= -->
+    <section id="results-view" class="view-section">
+      <div class="results-header glass animated-glow">
+        <div class="results-main-summary">
+          <div class="results-icon-badge">🎯</div>
+          <div>
+            <h1>Result Scorecard</h1>
+            <p id="result-test-title" class="sub-text">General Aptitude Assessment</p>
+            <div class="student-name-text">Candidate: <strong id="result-student-name">Alice Vance</strong></div>
+          </div>
+        </div>
+        
+        <div class="score-percentage-circle">
+          <svg class="progress-ring" width="120" height="120">
+            <circle class="progress-ring__circle-bg" stroke="rgba(255,255,255,0.08)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+            <circle id="score-ring" class="progress-ring__circle" stroke="var(--primary)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+          </svg>
+          <div class="circle-text">
+            <span id="result-percent-val" class="percent-val">0%</span>
+            <span class="percent-lbl">Score</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result Breakdown Stats -->
+      <div class="results-stats-row">
+        <div class="stat-panel glass border-left-primary">
+          <span class="panel-label">Final Marks Obtained</span>
+          <span class="panel-value"><span id="res-marks-val">0</span> / <span id="res-possible-val">0</span></span>
+        </div>
+        <div class="stat-panel glass border-left-success">
+          <span class="panel-label">Correct Answers</span>
+          <span class="panel-value text-success" id="res-correct-val">0</span>
+        </div>
+        <div class="stat-panel glass border-left-danger">
+          <span class="panel-label">Wrong Answers</span>
+          <span class="panel-value text-danger" id="res-wrong-val">0</span>
+        </div>
+        <div class="stat-panel glass border-left-warning">
+          <span class="panel-label">Skipped Questions</span>
+          <span class="panel-value text-warning" id="res-skipped-val">0</span>
+        </div>
+        <div class="stat-panel glass border-left-info">
+          <span class="panel-label">Global Rank</span>
+          <span class="panel-value text-info" id="res-rank-val">Rank 1 / 1</span>
+        </div>
+      </div>
+
+      <!-- Quantitative / Qualitative report -->
+      <div class="results-details-grid">
+        <div class="details-column flex-column">
+          <h2 class="section-title">Performance Evaluation</h2>
+          <div class="feedback-card glass">
+            <div class="pass-fail-badge" id="res-passfail-badge">Pass</div>
+            <p id="res-summary-text" class="feedback-paragraph">
+              Loading evaluation...
+            </p>
+            <div class="additional-meta-data">
+              <div>⏱️ <strong>Time Taken:</strong> <span id="res-time-taken">0 mins</span></div>
+              <div>⚡ <strong>Total Questions in Paper:</strong> <span id="res-total-paper-questions">0</span></div>
+            </div>
+          </div>
+
+          <h2 class="section-title">Section-wise Optional Answer Analysis</h2>
+          <div class="glass section-analysis-card">
+            <div id="section-optional-details">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <button class="btn btn-primary full-width" onclick="app.showView('dashboard-view')">Return to Dashboard</button>
+        </div>
+
+        <div class="details-column">
+          <h2 class="section-title">Detailed Question Review & Explanations</h2>
+          <div id="results-review-list" class="review-questions-list">
+            <!-- Dynamically populated detailed analysis of questions -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 4: ADMIN & SCHEMAS ================= -->
+    <section id="admin-view" class="view-section">
+      <div class="admin-tab-container">
+        <div class="admin-sidebar glass">
+          <h3>Admin Control Desk</h3>
+          <button class="admin-tab-btn active" id="tab-btn-add-q" onclick="app.showAdminTab('add-question-tab')">Add Question to Pool</button>
+          <button class="admin-tab-btn" id="tab-btn-manage-q" onclick="app.showAdminTab('manage-questions-tab')">Question Bank Manager</button>
+          <button class="admin-tab-btn" id="tab-btn-schemas" onclick="app.showAdminTab('schemas-tab')">Database Model Schemas</button>
+        </div>
+
+        <div class="admin-workspace glass">
+          
+          <!-- Tab 4.1: Add Question Form -->
+          <div id="add-question-tab" class="admin-tab-content active">
+            <h2>Add New Question to Bank</h2>
+            <p class="tab-subtitle">Integrates with the Random Question Engine to populate future exams.</p>
+            
+            <form id="add-question-form" class="admin-form" onsubmit="app.submitNewQuestion(event)">
+              <div class="form-row split">
+                <div class="form-group">
+                  <label for="add-q-category">Category *</label>
+                  <select id="add-q-category" onchange="app.updateSubCategoryDropdown()" required>
+                    <option value="Arithmetic">Arithmetic</option>
+                    <option value="Reasoning">Reasoning</option>
+                    <option value="English">English</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="add-q-subcategory">Sub Category *</label>
+                  <input type="text" id="add-q-subcategory" placeholder="e.g. Percentages, Blood Relations" required>
+                </div>
+              </div>
+
+              <div class="form-row split">
+                <div class="form-group">
+                  <label for="add-q-difficulty">Difficulty *</label>
+                  <select id="add-q-difficulty" required>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="add-q-type">Question Type *</label>
+                  <select id="add-q-type" onchange="app.toggleQuestionTypeForm()" required>
+                    <option value="MCQ">MCQ (Single Correct)</option>
+                    <option value="Multiple Correct">Multiple Correct (Multiple Options)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="add-q-text">Question Text *</label>
+                <textarea id="add-q-text" rows="3" placeholder="Enter question description..." required></textarea>
+              </div>
+
+              <!-- Options Config (Stored as an Array) -->
+              <div class="options-creator-container">
+                <div class="options-creator-header">
+                  <h3>Options List (Min 4, Max 5)</h3>
+                  <button type="button" class="btn btn-secondary-outline btn-xs" id="btn-add-option-row" onclick="app.addOptionRow()">+ Add Option E</button>
+                </div>
+                <p class="creator-note">The database shuffles option order for every attempt. Select the checkboxes on the right to mark correct option(s).</p>
+                
+                <div id="options-rows-container" class="options-rows-grid">
+                  <!-- Generated dynamically (usually A, B, C, D first, with optional E) -->
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="add-q-explanation">Explanation / Solution Steps</label>
+                <textarea id="add-q-explanation" rows="3" placeholder="Explain why the marked options are correct..."></textarea>
+              </div>
+
+              <div class="form-row split">
+                <div class="form-group">
+                  <label for="add-q-marks">Marks Awarded *</label>
+                  <input type="number" id="add-q-marks" min="1" max="10" value="2" required>
+                </div>
+                <div class="form-group">
+                  <label for="add-q-neg-marks">Negative Marks Deducted *</label>
+                  <input type="number" id="add-q-neg-marks" min="0" max="5" step="0.25" value="0.5" required>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Create and Save Question</button>
+            </form>
+          </div>
+
+          <!-- Tab 4.2: Manage Questions -->
+          <div id="manage-questions-tab" class="admin-tab-content">
+            <div class="tab-header-row">
+              <div>
+                <h2>Question Bank Manager</h2>
+                <p class="tab-subtitle">Browse and manage all existing questions in the database.</p>
+              </div>
+              <div class="filter-controls">
+                <label for="filter-category">Filter Category:</label>
+                <select id="filter-category" onchange="app.renderQuestionBank()">
+                  <option value="All">All Categories</option>
+                  <option value="Arithmetic">Arithmetic</option>
+                  <option value="Reasoning">Reasoning</option>
+                  <option value="English">English</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="question-list-table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Difficulty</th>
+                    <th>Type</th>
+                    <th>Question Snippet</th>
+                    <th>Marks</th>
+                  </tr>
+                </thead>
+                <tbody id="question-bank-body">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Tab 4.3: Schemas Tab -->
+          <div id="schemas-tab" class="admin-tab-content">
+            <h2>System Data Model & Schemas</h2>
+            <p class="tab-subtitle">Visual representation of JSON schemas mapping Question, Test, Attempt, Answer, and Result models.</p>
+            
+            <div class="schemas-grid">
+              <div class="schema-card">
+                <h3>1. Question Model Schema</h3>
+                <pre class="code-block"><code>{
+  "id": "Q101",
+  "text": "Question Text string...",
+  "image": "https://url.com/img.jpg" (Optional),
+  "category": "Arithmetic",
+  "subCategory": "Profit & Loss",
+  "difficulty": "Easy" | "Medium" | "Hard",
+  "type": "MCQ" | "Multiple Correct" | "True/False",
+  "options": [ // Array of option records (min 4, max 5)
+    { "id": 1, "text": "Option Text A" },
+    { "id": 2, "text": "Option Text B" },
+    ...
+  ],
+  "correctAnswer": [2], // Option IDs mapped as array
+  "explanation": "Detailed explanation...",
+  "marks": 3,
+  "negativeMarks": 1.0,
+  "language": "English",
+  "status": "Active",
+  "createdAt": "ISOString",
+  "updatedAt": "ISOString"
+}</code></pre>
+              </div>
+
+              <div class="schema-card">
+                <h3>2. Section & Test Structure</h3>
+                <pre class="code-block"><code>{
+  "id": "T1",
+  "title": "General Aptitude Test",
+  "sections": [
+    {
+      "id": "sec1",
+      "name": "Arithmetic",
+      "category": "Arithmetic",
+      "totalQuestions": 20,
+      "answerRequired": 15,
+      "randomQuestions": true // Random Question Engine flag
+    },
+    ...
+  ],
+  "durationMinutes": 30,
+  "passingPercentage": 45
+}</code></pre>
+              </div>
+
+              <div class="schema-card">
+                <h3>3. Student Answer Model</h3>
+                <pre class="code-block"><code>{
+  "studentId": "S101",
+  "testId": "T1",
+  "attemptId": "att_f382a9",
+  "answers": {
+    "Q102": {
+      "selectedOptionIds": [2, 4], // Array of selected option IDs
+      "timeTaken": 45, // Seconds spent
+      "visited": true,
+      "answered": true,
+      "markedForReview": false,
+      "skipped": false,
+      "answerChangedCount": 1 // Updates on change
+    }
+  }
+}</code></pre>
+              </div>
+
+              <div class="schema-card">
+                <h3>4. Result Calculation Output</h3>
+                <pre class="code-block"><code>{
+  "results": {
+    "correct": 9,
+    "wrong": 2,
+    "skipped": 1,
+    "optionalAnswerCount": {
+      "sec1": 4 // Counters validating limit rules
+    },
+    "marks": 18.0,
+    "negativeMarks": 1.0,
+    "netMarks": 17.0,
+    "totalPossibleMarks": 23.0,
+    "percentage": 73.91,
+    "passFail": "Pass" | "Fail",
+    "rank": 2, // Dynamic placement rank
+    "timeTaken": 320,
+    "resultSummary": "Qualitative overview..."
+  }
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 StudentFuture Examination Platform. Designed for Pair Programming Assessment.</p>
+    </div>
+  </footer>
+
+  <!-- App JavaScript -->
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+[
+  {
+    "text": "Pointing to a photograph, Vicky said, 'He is the son of the only son of my grandfather.' How is the man in the photograph related to Vicky?",
+    "category": "Reasoning Ability",
+    "subCategory": "Blood Relation",
+    "difficulty": "Medium",
+    "type": "MCQ",
+    "options": [
+      { "id": 1, "text": "Brother" },
+      { "id": 2, "text": "Uncle" },
+      { "id": 3, "text": "Cousin" },
+      { "id": 4, "text": "Father" }
+    ],
+    "correctAnswer": [1],
+    "explanation": "Grandfather's only son is Vicky's father. The son of Vicky's father is Vicky's brother.",
+    "marks": 2,
+    "negativeMarks": 0.5,
+    "language": "English",
+    "status": "Active"
+  },
+  {
+    "text": "Statements: (1) All cups are plates. (2) All plates are spoons. Which of the following conclusions logically follow?",
+    "category": "Reasoning Ability",
+    "subCategory": "Syllogism",
+    "difficulty": "Easy",
+    "type": "MCQ",
+    "options": [
+      { "id": 1, "text": "Only conclusion I follows: All cups are spoons" },
+      { "id": 2, "text": "Only conclusion II follows: Some spoons are plates" },
+      { "id": 3, "text": "Both conclusions I and II follow" },
+      { "id": 4, "text": "Neither follows" }
+    ],
+    "correctAnswer": [3],
+    "explanation": "By syllogism: Cups inside Plates, Plates inside Spoons. Therefore, Cups are inside Spoons, and some Spoons are indeed Plates.",
+    "marks": 2,
+    "negativeMarks": 0.5,
+    "language": "English",
+    "status": "Active"
+  },
+  {
+    "text": "Five friends sit in a circle facing the center: A is to the immediate left of C. E is to the immediate right of D. B is between C and D. Who are sitting adjacent to E? (Select all correct options)",
+    "category": "Reasoning Ability",
+    "subCategory": "Puzzle",
+    "difficulty": "Hard",
+    "type": "Multiple Correct",
+    "options": [
+      { "id": 1, "text": "A" },
+      { "id": 2, "text": "B" },
+      { "id": 3, "text": "C" },
+      { "id": 4, "text": "D" }
+    ],
+    "correctAnswer": [1, 4],
+    "explanation": "Drawing the circle starting clockwise: C -> B -> D -> E -> A. Thus E sits adjacent to A and D.",
+    "marks": 4,
+    "negativeMarks": 1.0,
+    "language": "English",
+    "status": "Active"
+  },
+  {
+    "text": "A man walks 6 km South, turns left and walks 4 km, then turns left again and walks 5 km. Which direction is he facing now?",
+    "category": "Reasoning Ability",
+    "subCategory": "Direction",
+    "difficulty": "Easy",
+    "type": "MCQ",
+    "options": [
+      { "id": 1, "text": "North" },
+      { "id": 2, "text": "South" },
+      { "id": 3, "text": "East" },
+      { "id": 4, "text": "West" }
+    ],
+    "correctAnswer": [1],
+    "explanation": "South -> turn left is East -> turn left is North. Facing North.",
+    "marks": 2,
+    "negativeMarks": 0.5,
+    "language": "English",
+    "status": "Active"
+  },
+  {
+    "text": "Find the missing term in the sequence: 2, 6, 12, 20, 30, ?, 56",
+    "category": "Reasoning Ability",
+    "subCategory": "Series",
+    "difficulty": "Easy",
+    "type": "MCQ",
+    "options": [
+      { "id": 1, "text": "40" },
+      { "id": 2, "text": "42" },
+      { "id": 3, "text": "44" },
+      { "id": 4, "text": "48" }
+    ],
+    "correctAnswer": [2],
+    "explanation": "Sequence adds consecutive even numbers: +4, +6, +8, +10, so next is +12 => 30 + 12 = 42.",
+    "marks": 2,
+    "negativeMarks": 0.5,
+    "language": "English",
+    "status": "Active"
+  }
+]

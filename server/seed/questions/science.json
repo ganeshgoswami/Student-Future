@@ -1,0 +1,103 @@
+[
+  {
+    "text": "Which chemical element has the symbol 'H' and atomic number 1?",
+    "hindiText": "किस रासायनिक तत्व का प्रतीक 'H' और परमाणु संख्या 1 है?",
+    "category": "Science",
+    "subCategory": "Chemistry",
+    "difficulty": "Easy",
+    "type": "MCQ",
+    "options": [
+      { "id": 1, "text": "Helium", "hindiText": "हीलियम" },
+      { "id": 2, "text": "Oxygen", "hindiText": "ऑक्सीजन" },
+      { "id": 3, "text": "Hydrogen", "hindiText": "हाइड्रोजन" },
+      { "id": 4, "text": "Nitrogen", "hindiText": "नाइट्रोजन" }
+    ],
+    "correctAnswer": [3],
+    "explanation": "Hydrogen is the chemical element with the symbol H and atomic number 1. It is the lightest element in the periodic table.",
+    "marks": 2,
+    "negativeMarks": 0.5,
+    "language": "English",
+    "status": "Active"
+  },
+  {
+    "text": "What is the acceleration due to gravity on Earth's surface?",
+    "hindiText": "पृथ्वी की सतह पर गुरुत्वाकर्षण के कारण त्वरण क्या है?",
+    "category": "Science",
+    "subCategory": "Physics",
+    "difficulty": "Easy",
+    "type": "MCQ",
+    "options": [
+      { "id": 1, "text": "9.8 m/s²", "hindiText": "9.8 मीटर/सेकंड²" },
+      { "id": 2, "text": "8.9 m/s²", "hindiText": "8.9 मीटर/सेकंड²" },
+      { "id": 3, "text": "10.5 m/s²", "hindiText": "10.5 मीटर/सेकंड²" },
+      { "id": 4, "text": "7.2 m/s²", "hindiText": "7.2 मीटर/सेकंड²" }
+    ],
+    "correctAnswer": [1],
+    "explanation": "The standard acceleration due to gravity on Earth's surface is approximately 9.8 m/s².",
+    "marks": 2,
+    "negativeMarks": 0.5,
+    "language": "English",
+    "status": "Active"
+  },
+  {
+    "text": "Which organ in the human body is responsible for pumping blood?",
+    "hindiText": "मानव शरीर में कौन सा अंग रक्त पंप करने के लिए जिम्मेदार है?",
+    "category": "Science",
+    "subCategory": "Biology",
+    "difficulty": "Easy",
+    "type": "MCQ",
+    "options": [
+      { "id": 1, "text": "Brain", "hindiText": "मस्तिष्क" },
+      { "id": 2, "text": "Lungs", "hindiText": "फेफड़े" },
+      { "id": 3, "text": "Heart", "hindiText": "हृदय" },
+      { "id": 4, "text": "Liver", "hindiText": "यकृत" }
+    ],
+    "correctAnswer": [3],
+    "explanation": "The heart is a muscular organ in most animals, which pumps blood through the blood vessels of the circulatory system.",
+    "marks": 2,
+    "negativeMarks": 0.5,
+    "language": "English",
+    "status": "Active"
+  },
+  {
+    "text": "What process do plants use to convert sunlight into chemical energy?",
+    "hindiText": "पौधे सूर्य के प्रकाश को रासायनिक ऊर्जा में बदलने के लिए किस प्रक्रिया का उपयोग करते हैं?",
+    "category": "Science",
+    "subCategory": "Biology",
+    "difficulty": "Easy",
+    "type": "MCQ",
+    "options": [
+      { "id": 1, "text": "Respiration", "hindiText": "श्वसन" },
+      { "id": 2, "text": "Photosynthesis", "hindiText": "प्रकाश संश्लेषण" },
+      { "id": 3, "text": "Fermentation", "hindiText": "किण्वन" },
+      { "id": 4, "text": "Transpiration", "hindiText": "वाष्पोत्सर्जन" }
+    ],
+    "correctAnswer": [2],
+    "explanation": "Photosynthesis is the process used by plants, algae, and certain bacteria to harness energy from sunlight and turn it into chemical energy.",
+    "marks": 2,
+    "negativeMarks": 0.5,
+    "language": "English",
+    "status": "Active"
+  },
+  {
+    "text": "Which of the following are greenhouse gases? (Select all correct options)",
+    "hindiText": "निम्नलिखित में से कौन सी ग्रीनहाउस गैसें हैं? (सभी सही विकल्प चुनें)",
+    "category": "Science",
+    "subCategory": "Environmental Science",
+    "difficulty": "Medium",
+    "type": "Multiple Correct",
+    "options": [
+      { "id": 1, "text": "Carbon Dioxide", "hindiText": "कार्बन डाइऑक्साइड" },
+      { "id": 2, "text": "Methane", "hindiText": "मीथेन" },
+      { "id": 3, "text": "Water Vapor", "hindiText": "जल वाष्प" },
+      { "id": 4, "text": "Nitrogen", "hindiText": "नाइट्रोजन" },
+      { "id": 5, "text": "Oxygen", "hindiText": "ऑक्सीजन" }
+    ],
+    "correctAnswer": [1, 2, 3],
+    "explanation": "Greenhouse gases include water vapor, carbon dioxide, methane, nitrous oxide, and ozone. Nitrogen and Oxygen are not greenhouse gases.",
+    "marks": 3,
+    "negativeMarks": 0.5,
+    "language": "English",
+    "status": "Active"
+  }
+]

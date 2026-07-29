@@ -1,0 +1,98 @@
+[
+  {
+    "text": "A shopkeeper sells an item at a profit of 20%. If he had bought it at 10% less and sold it for $18 less, he would have gained 30%. What is the cost price of the item?",
+    "category": "Quantitative Aptitude",
+    "subCategory": "Profit Loss",
+    "difficulty": "Hard",
+    "type": "MCQ",
+    "options": [
+      { "id": 1, "text": "$150" },
+      { "id": 2, "text": "$600" },
+      { "id": 3, "text": "$250" },
+      { "id": 4, "text": "$300" }
+    ],
+    "correctAnswer": [2],
+    "explanation": "Let Cost Price = 100x. Selling Price = 120x. New CP = 90x. New SP = 120x - 18. New profit = 30% of 90x = 27x. So, 120x - 18 = 90x + 27x = 117x => 3x = 18 => x = 6. CP = 100 * 6 = $600.",
+    "marks": 3,
+    "negativeMarks": 1.0,
+    "language": "English",
+    "status": "Active"
+  },
+  {
+    "text": "A and B can complete a work in 15 days and 10 days respectively. They started the work together but A left after 3 days. In how many days will B complete the remaining work?",
+    "category": "Quantitative Aptitude",
+    "subCategory": "Time Work",
+    "difficulty": "Easy",
+    "type": "MCQ",
+    "options": [
+      { "id": 1, "text": "5 days" },
+      { "id": 2, "text": "6 days" },
+      { "id": 3, "text": "7 days" },
+      { "id": 4, "text": "8 days" }
+    ],
+    "correctAnswer": [1],
+    "explanation": "Rate A = 1/15, Rate B = 1/10. Together = 1/15 + 1/10 = 1/6 per day. In 3 days they complete 3/6 = 1/2 of the work. Remaining = 1/2. B takes (1/2) / (1/10) = 5 days.",
+    "marks": 2,
+    "negativeMarks": 0.5,
+    "language": "English",
+    "status": "Active"
+  },
+  {
+    "text": "Which of the following numbers are prime numbers? (Select all correct options)",
+    "category": "Quantitative Aptitude",
+    "subCategory": "Arithmetic",
+    "difficulty": "Medium",
+    "type": "Multiple Correct",
+    "options": [
+      { "id": 1, "text": "101" },
+      { "id": 2, "text": "119" },
+      { "id": 3, "text": "143" },
+      { "id": 4, "text": "167" },
+      { "id": 5, "text": "187" }
+    ],
+    "correctAnswer": [1, 4],
+    "explanation": "101 and 167 have no divisors smaller than their square roots. 119 = 7 * 17. 143 = 11 * 13. 187 = 11 * 17.",
+    "marks": 4,
+    "negativeMarks": 1.0,
+    "language": "English",
+    "status": "Active"
+  },
+  {
+    "text": "At what rate of simple interest per annum will a sum of money double itself in 8 years?",
+    "category": "Quantitative Aptitude",
+    "subCategory": "Simple Interest",
+    "difficulty": "Easy",
+    "type": "MCQ",
+    "options": [
+      { "id": 1, "text": "10%" },
+      { "id": 2, "text": "12.5%" },
+      { "id": 3, "text": "15%" },
+      { "id": 4, "text": "16.67%" }
+    ],
+    "correctAnswer": [2],
+    "explanation": "SI = P. SI = P * R * T / 100 => P = P * R * 8 / 100 => R = 100 / 8 = 12.5%.",
+    "marks": 2,
+    "negativeMarks": 0.5,
+    "language": "English",
+    "status": "Active"
+  },
+  {
+    "text": "A train 150 meters long passes a telegraph post in 12 seconds. How long will it take to cross a bridge of length 250 meters?",
+    "category": "Quantitative Aptitude",
+    "subCategory": "Arithmetic",
+    "difficulty": "Medium",
+    "type": "MCQ",
+    "options": [
+      { "id": 1, "text": "20 seconds" },
+      { "id": 2, "text": "24 seconds" },
+      { "id": 3, "text": "32 seconds" },
+      { "id": 4, "text": "40 seconds" }
+    ],
+    "correctAnswer": [3],
+    "explanation": "Speed = 150 / 12 = 12.5 m/s. Distance to cross bridge = 150 + 250 = 400m. Time = 400 / 12.5 = 32 seconds.",
+    "marks": 2,
+    "negativeMarks": 0.5,
+    "language": "English",
+    "status": "Active"
+  }
+]
