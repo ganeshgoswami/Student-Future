@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthContext';
-import API from '../../services/api';
+import API, { API_BASE_URL } from '../../services/api';
 
 export const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -49,7 +49,7 @@ export const Dashboard = () => {
   const getProfileImage = () => {
     if (user?.profilePhoto) {
       if (user.profilePhoto.startsWith('http')) return user.profilePhoto;
-      return `http://localhost:5000${user.profilePhoto}`;
+      return `${API_BASE_URL}${user.profilePhoto}`;
     }
     const seed = user ? `${user.firstName}_${user.lastName}` : 'default';
     return `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(seed)}`;
@@ -57,7 +57,7 @@ export const Dashboard = () => {
 
   const getPdfUrl = (url) => {
     if (url.startsWith('http')) return url;
-    return `http://localhost:5000${url}`;
+    return `${API_BASE_URL}${url}`;
   };
 
   // Metrics aggregations

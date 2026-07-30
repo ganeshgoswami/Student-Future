@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import API from '../../services/api';
+import API, { API_BASE_URL } from '../../services/api';
 
 export const Result = () => {
   const { id } = useParams(); // Attempt ID
@@ -32,7 +32,7 @@ export const Result = () => {
   const getPdfUrl = (url) => {
     if (!url) return '';
     if (url.startsWith('http')) return url;
-    return `http://localhost:5000${url}`;
+    return `${API_BASE_URL}${url}`;
   };
 
   if (loading) {

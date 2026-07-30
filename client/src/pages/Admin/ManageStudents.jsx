@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Sidebar } from '../../components/Sidebar';
 import { toast } from 'react-toastify';
-import API from '../../services/api';
+import API, { API_BASE_URL } from '../../services/api';
 
 export const ManageStudents = () => {
   const [students, setStudents] = useState([]);
@@ -41,7 +41,7 @@ export const ManageStudents = () => {
   const getProfileImage = (photo, name) => {
     if (photo) {
       if (photo.startsWith('http')) return photo;
-      return `http://localhost:5000${photo}`;
+      return `${API_BASE_URL}${photo}`;
     }
     const seed = name || 'default';
     return `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(seed)}`;

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { API_BASE_URL } from '../services/api';
 
 export const Navbar = () => {
   const { isAuthenticated, user, logout } = useContext(AuthContext);
@@ -16,7 +17,7 @@ export const Navbar = () => {
       if (user.profilePhoto.startsWith('http')) {
         return user.profilePhoto;
       }
-      return `http://localhost:5000${user.profilePhoto}`;
+      return `${API_BASE_URL}${user.profilePhoto}`;
     }
     const seed = user ? `${user.firstName}_${user.lastName}` : 'default';
     return `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(seed)}`;
